@@ -9,6 +9,7 @@ const Home = () => {
             <h1>Server Component</h1>
             <ClientComponent />
             <h1> <Link href="/login"> test </Link></h1>
+            <Link href="/playlist"> playlist </Link>
         </div>
     );
 };
