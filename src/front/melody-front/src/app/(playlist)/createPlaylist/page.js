@@ -3,19 +3,19 @@ import React, {useEffect, useState} from 'react';
 
 function Playlistform() {
     // Define state variables for form fields
-    const [useraccount_id, setUseraccount_id] = useState('');
-    const [playlist_name, setPlaylist_name] = useState('');
+    const [userAccountId, setUserAccountId] = useState(0); // useraccount_id를 상태로 변경
+    const [playlistName, setPlaylistName] = useState('');
     const [description, setDescription] = useState('');
-    const [created_date, setCreated_date] = useState('');
-    const [playlist_hashtags, setPlaylist_hashtags] = useState('');
+    const [createdDate, setCreatedDate] = useState('');
+    const [playlistHashtags, setPlaylistHashtags] = useState('');
 
     useEffect(() => {
-        const created_date = new Date().toLocaleDateString();
-        setCreated_date(created_date);
+        const createdDate = new Date().toISOString().slice(0, 10);
+        setCreatedDate(createdDate);
     }, []);
 
     const handlePlaylist_name = (e) => {
-        setPlaylist_name(e.target.value)
+        setPlaylistName(e.target.value)
     }
 
     const handleDescription = (e) => {
@@ -23,22 +23,27 @@ function Playlistform() {
     }
 
     const handlePlaylist_hashtags = (e) => {
-        setCreated_date(e.target.value)
+        setPlaylistHashtags(e.target.value)
     }
 
-    const handleCreatePlaylist = async () => {
+    const handlePlaylist_useraccount_id = (e) => {
+        const userAccountId = parseInt(e.target.value);
+        setUserAccountId(userAccountId);
+    }
+
+    const handleCreatePlaylist = async (e) => {
         e.preventDefault()
 
         const playlist = {
-            useraccount_id,
-            playlist_name,
+            userAccountId,
+            playlistName,
             description,
-            created_date,
-            playlist_hashtags
+            createdDate,
+            playlistHashtags
         };
 
         try{
-            const response = await fetch('/api/create-playlist',{
+            const response = await fetch('/api/playlist',{
                 method:'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -49,6 +54,7 @@ function Playlistform() {
             if(response.ok) {
                 alert('create playlist successfully')
             } else {
+                console.log(playlist)
                alert('failed playlist Please try again')
             }
 
@@ -66,10 +72,17 @@ function Playlistform() {
             <form onSubmit={handleCreatePlaylist}>
                 <h1>Playlist Create Page</h1>
 
+                <label>유저어카운트 temp</label><br/>
+                <input
+                    type="text"
+                    name="input_playlist_account_id"
+                    onChange={handlePlaylist_useraccount_id}
+                /><br/>
+
                 <label>플레이리스트 이름</label><br/>
                 <input
                     type="text"
-                    name="input_playlist_name"
+                    name="input_playlistName"
                     onChange={handlePlaylist_name}
                 /><br/>
 
@@ -86,6 +99,7 @@ function Playlistform() {
                     name="input_playlist_hashtags"
                     onChange={handlePlaylist_hashtags}
                 /><br/><p/>
+
 
                 <input
                     type="submit"

@@ -8,7 +8,7 @@ function Playlist   () {
     const [playlists, setPlaylists] = useState([]);
 
     useEffect(()=>{
-        fetch("api/get-playlist",{
+        fetch("/api/playlist",{
             method:"POST",
             headers: {
                 "Content-type": "application/json",
@@ -21,7 +21,7 @@ function Playlist   () {
                 setPlaylists(data);
             })
 
-    })
+    },[])
 
     return (
         <>
@@ -30,9 +30,9 @@ function Playlist   () {
 
             <div>
                 <ul>
-                    {playlists.map((playlist, index) => (
-                        <li key={index}>{playlist}</li>
-                    ))}
+                    {/*{playlists.map((playlist, index) => (*/}
+                    {/*    <li key={index}>{playlist}</li>*/}
+                    {/*))}*/}
                 </ul>
             </div>
         </>
