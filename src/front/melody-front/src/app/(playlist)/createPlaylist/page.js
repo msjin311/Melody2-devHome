@@ -1,9 +1,12 @@
 "use client"
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
+import { AppContext } from './page.js';
 
-function Playlistform() {
+function Playlistform(props) {
+    const { globalState } = useContext(AppContext);
+    const userAccountId = globalState.userAccountId;
     // Define state variables for form fields
-    const [userAccountId, setUserAccountId] = useState(0); // useraccount_id를 상태로 변경
+    // const [userAccountId, setUserAccountId] = useState(0); // useraccount_id를 상태로 변경
     const [playlistName, setPlaylistName] = useState('');
     const [description, setDescription] = useState('');
     const [createdDate, setCreatedDate] = useState('');
@@ -12,7 +15,7 @@ function Playlistform() {
     useEffect(() => {
         const createdDate = new Date().toISOString().slice(0, 10);
         setCreatedDate(createdDate);
-    }, []);
+    }, [createdDate]);
 
     const handlePlaylist_name = (e) => {
         setPlaylistName(e.target.value)
@@ -26,13 +29,14 @@ function Playlistform() {
         setPlaylistHashtags(e.target.value)
     }
 
-    const handlePlaylist_useraccount_id = (e) => {
-        const userAccountId = parseInt(e.target.value);
-        setUserAccountId(userAccountId);
-    }
+    // const handlePlaylist_useraccount_id = (e) => {
+    //     const userAccountId = parseInt(e.target.value);
+    //     setUserAccountId(userAccountId);
+    // }
 
     const handleCreatePlaylist = async (e) => {
         e.preventDefault()
+
 
         const playlist = {
             userAccountId,
@@ -52,6 +56,7 @@ function Playlistform() {
             });
 
             if(response.ok) {
+                console.log(playlist)
                 alert('create playlist successfully')
             } else {
                 console.log(playlist)
@@ -72,12 +77,12 @@ function Playlistform() {
             <form onSubmit={handleCreatePlaylist}>
                 <h1>Playlist Create Page</h1>
 
-                <label>유저어카운트 temp</label><br/>
-                <input
-                    type="text"
-                    name="input_playlist_account_id"
-                    onChange={handlePlaylist_useraccount_id}
-                /><br/>
+                {/*<label>유저어카운트 temp</label><br/>*/}
+                {/*<input*/}
+                {/*    type="text"*/}
+                {/*    name="input_playlist_account_id"*/}
+                {/*    onChange={handlePlaylist_useraccount_id}*/}
+                {/*/><br/>*/}
 
                 <label>플레이리스트 이름</label><br/>
                 <input

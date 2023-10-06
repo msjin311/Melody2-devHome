@@ -2,6 +2,8 @@ package com.acorn.melody2.controller;
 
 import com.acorn.melody2.entity.UserAccount;
 import com.acorn.melody2.service.UserAccountService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/user-accounts")
 public class UserAccountBasicController {
+    private static final Logger logger = LoggerFactory.getLogger(UserAccountBasicController.class);
     private final UserAccountService userAccountService;
 
     @Autowired
@@ -48,5 +51,19 @@ public class UserAccountBasicController {
     public ResponseEntity<Void> deleteUserAccount(@PathVariable Long id) {
         userAccountService.deleteUserAccount(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/login")
+    public ResponseEntity<UserAccount> login(@RequestParam String id, @RequestParam String password) {
+        logger.warn(id);
+        logger.warn(password);
+        Optional<UserAccount> userAccount = Optional.ofNullable(userAccountService.login(id, password));
+        if (userAccount.isPresent() && userAccount.get().getPassword().equals(password)) {
+            // 로그인 성공
+            return ResponseEntity.ok(userAccount.get());
+        } else {
+            // 로그인 실패
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
     }
 }

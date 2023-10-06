@@ -38,4 +38,8 @@ public class UserAccountService {
     public void deleteUserAccount(Long id) {
         userAccountRepository.deleteById(id);
     }
+
+    public UserAccount login(String accountId, String password) {
+        return userAccountRepository.findByAccountIdAndPassword(accountId, password);
+    }
 }
