@@ -1,12 +1,10 @@
 "use client"
 import React, {useContext, useEffect, useState} from 'react';
-import { AppContext } from './page.js';
 
 function Playlistform(props) {
-    const { globalState } = useContext(AppContext);
-    const userAccountId = globalState.userAccountId;
     // Define state variables for form fields
     // const [userAccountId, setUserAccountId] = useState(0); // useraccount_id를 상태로 변경
+
     const [playlistName, setPlaylistName] = useState('');
     const [description, setDescription] = useState('');
     const [createdDate, setCreatedDate] = useState('');
@@ -39,7 +37,7 @@ function Playlistform(props) {
 
 
         const playlist = {
-            userAccountId,
+            // userAccountId,
             playlistName,
             description,
             createdDate,
@@ -56,9 +54,11 @@ function Playlistform(props) {
             });
 
             if(response.ok) {
+                console.log("유저어카운트",props.userAccountId)
                 console.log(playlist)
                 alert('create playlist successfully')
             } else {
+                console.log("유저어카운트",props.userAccountId)
                 console.log(playlist)
                alert('failed playlist Please try again')
             }

@@ -1,8 +1,8 @@
 'use client'
 import {createContext, useContext, useEffect, useState} from "react";
 import axios from "axios";
-import {UserAccountContext} from "./../../../components/UserAccountContext"
-
+// import {UserAccountContext} from "./../../../components/UserAccountContext"
+import {UserAccountContext} from "./../UserAccountContext"
 
 const AuthPage = () => {
     const [userAccountId, setUserAccountId] = useState(0);
@@ -16,7 +16,7 @@ const AuthPage = () => {
     const [userAccount, setUserAccount] = useState(UserAccountContext);
 
     useEffect(() => {
-        console.log("Global place login", userAccount);
+        console.log("component login", userAccount);
     }, [userAccount]); // userAccount가 업데이트될 때만 실행됩니다.
 
     const handleLogin = async (e) => {
@@ -58,38 +58,38 @@ const AuthPage = () => {
 
 
     return (
-    <div className="py-8">
-    <h1 className="text-3xl font-bold mb-4">Authentication Page</h1>
-    <div className="flex flex-col space-y-4">
-    {/*<input*/}
-    {/*    type="email"*/}
-    {/*placeholder="Email"*/}
-    {/*className="px-4 py-2 border border-gray-300 rounded"*/}
-    {/*/>*/}
-    <form onSubmit={handleLogin}>
-        <input
-            type="text"
-            placeholder="id"
-            className="px-4 py-2 border border-gray-300 rounded"
-            onChange={(e) => setAccountId(e.target.value)}
-        />
-        <input
-            type="password"
-        placeholder="Password"
-        className="px-4 py-2 border border-gray-300 rounded"
-            onChange={(e) => setPassword(e.target.value)}
-        />
-        <input
-        className="px-4 py-2 bg-blue-500 text-white rounded"
-        type="submit"
-        />
-        <button className="px-4 py-2 bg-blue-500 text-white rounded">
-            Sign In
-        </button>
-    </form>
-    </div>
-    </div>
-)
+        <div className="py-8">
+            <h1 className="text-3xl font-bold mb-4">Authentication Page</h1>
+            <div className="flex flex-col space-y-4">
+                {/*<input*/}
+                {/*    type="email"*/}
+                {/*placeholder="Email"*/}
+                {/*className="px-4 py-2 border border-gray-300 rounded"*/}
+                {/*/>*/}
+                <form onSubmit={handleLogin}>
+                    <input
+                        type="text"
+                        placeholder="id"
+                        className="px-4 py-2 border border-gray-300 rounded"
+                        onChange={(e) => setAccountId(e.target.value)}
+                    />
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        className="px-4 py-2 border border-gray-300 rounded"
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <input
+                        className="px-4 py-2 bg-blue-500 text-white rounded"
+                        type="submit"
+                    />
+                    <button className="px-4 py-2 bg-blue-500 text-white rounded">
+                        Sign In
+                    </button>
+                </form>
+            </div>
+        </div>
+    )
 }
 
 export default AuthPage

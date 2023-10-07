@@ -2,7 +2,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import Link from 'next/link';
 import {data} from "autoprefixer";
-import { UserAccountContext } from "./../../../components/UserAccountContext";
+// import { UserAccountContext } from "./../../../components/UserAccountContext";
+import {UserAccountContext} from "./../UserAccountContext"
 
 function Playlist   () {
     const [useraccount_id, setUseraccount_id] = useState('')
@@ -11,8 +12,8 @@ function Playlist   () {
     const userAccount = useContext(UserAccountContext);
 
     useEffect(() => {
-        console.log("Global place playlist", userAccount);
-    }, []);
+        console.log("component playlist", userAccount);
+    }, [userAccount]);
 
     // useEffect(()=>{
     //     fetch("/api/playlist",{
@@ -34,6 +35,7 @@ function Playlist   () {
         <>
             <h1>Playlists Page</h1>
             <Link href="/createPlaylist">Create Playlist</Link>
+            <h1>{userAccount.accountId}</h1>
 
             <div>
                 <ul>
