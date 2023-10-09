@@ -3,15 +3,19 @@ import React, { useEffect, useState, useContext } from 'react';
 import Link from 'next/link';
 import {data} from "autoprefixer";
 import { UserAccountContext } from "./../../../components/UserAccountContext";
+import { useRouter } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
+
 
 function Playlist   () {
     const [useraccount_id, setUseraccount_id] = useState('')
     const [playlists, setPlaylists] = useState([]);
 
-    const userAccount = useContext(UserAccountContext);
+    const { userAccount } = useContext(UserAccountContext);
 
     useEffect(() => {
         console.log("Global place playlist", userAccount);
+
     }, []);
 
     // useEffect(()=>{

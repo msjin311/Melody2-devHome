@@ -3,12 +3,16 @@
 import Link from "next/link";
 import ClientComponent from "../components/ClientComponent";
 import {UserAccountProvider} from "../components/UserAccountProvider";
-import {useEffect, useState} from "react";
-import {UserAccountContext} from "../components/UserAccountContext";
+import {useEffect, useState, useContext} from "react";
+import {UserAccountContext  } from "../components/UserAccountContext";
 import Login from "./../components/user/Login";
 import Playlist from "./../components/user/Playlist";
+// import {useHistory} from "react-router";
 
 const Home = () => {
+    const userAccount = useContext(UserAccountContext);
+    // const history = useHistory();
+
     return (
         <>
             <UserAccountProvider>
@@ -17,7 +21,7 @@ const Home = () => {
                     <ClientComponent />
                     <h1> <Link href="/login"> test </Link></h1>
                     <br/>
-                    <Link href="/playlist"> playlist </Link>
+                    <Link href="/playlist" state={{UserAccountContext}}> playlist </Link>
                     <br/>
                     <Link href="/createPlaylist">Create Playlist</Link>
 

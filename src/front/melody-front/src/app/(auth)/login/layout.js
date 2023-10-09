@@ -2,6 +2,9 @@
 import {createContext, useContext, useEffect, useState} from "react";
 import axios from "axios";
 import {UserAccountContext} from "./../../../components/UserAccountContext"
+import { useNavigate } from 'react-router-dom';
+import Link from "next/link";
+import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 
 
 const AuthPage = () => {
@@ -13,7 +16,9 @@ const AuthPage = () => {
     const [email, setEmail] = useState('');
     const [gender, setGender] = useState('Male');
     const [userHashtags, setUserHashtags] = useState('');
+
     const [userAccount, setUserAccount] = useState(UserAccountContext);
+    const router = useRouter()
 
     useEffect(() => {
         console.log("Global place login", userAccount);
@@ -42,10 +47,8 @@ const AuthPage = () => {
             setGender(DBuserAccount.gender);
             setUserHashtags(DBuserAccount.userHashtags);
             setUserAccount(DBuserAccount)
-
-
-
-
+            const jsonuserAccount = JSON.stringify(DBuserAccount)
+            console.log("josn",jsonuserAccount)
 
 
 
@@ -87,6 +90,9 @@ const AuthPage = () => {
             Sign In
         </button>
     </form>
+        <button type="button" onClick={() => router.push('/playlist')}>
+            Playlist
+        </button>
     </div>
     </div>
 )
