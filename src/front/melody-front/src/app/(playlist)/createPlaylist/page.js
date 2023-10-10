@@ -1,14 +1,22 @@
 "use client"
 import React, {useContext, useEffect, useState} from 'react';
+import {useUserContext} from "./../../Context/userAccount"
 
 function Playlistform(props) {
     // Define state variables for form fields
     // const [userAccountId, setUserAccountId] = useState(0); // useraccount_id를 상태로 변경
-
+    const {userAccount, setUserAccount} = useUserContext()
+    const userAccountId = userAccount.userAccountId
     const [playlistName, setPlaylistName] = useState('');
     const [description, setDescription] = useState('');
     const [createdDate, setCreatedDate] = useState('');
     const [playlistHashtags, setPlaylistHashtags] = useState('');
+
+
+    useEffect(() => {
+        console.log("createPlaylist userAccount object", userAccount);
+        console.log("userAccountId value",userAccountId)
+    }, [userAccount]); // userAccount가 업데이트될 때만 실행됩니다.
 
     useEffect(() => {
         const createdDate = new Date().toISOString().slice(0, 10);
@@ -37,7 +45,7 @@ function Playlistform(props) {
 
 
         const playlist = {
-            // userAccountId,
+            userAccountId,
             playlistName,
             description,
             createdDate,

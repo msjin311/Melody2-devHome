@@ -1,8 +1,8 @@
 'use client'
 import {createContext, useContext, useEffect, useState} from "react";
 import axios from "axios";
-import {UserAccountContext} from "./../../../components/UserAccountContext"
-import { useNavigate } from 'react-router-dom';
+import {useUserContext} from "./../../Context/userAccount"
+// import { useNavigate } from 'react-router-dom';
 import Link from "next/link";
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 
@@ -17,11 +17,11 @@ const AuthPage = () => {
     const [gender, setGender] = useState('Male');
     const [userHashtags, setUserHashtags] = useState('');
 
-    const [userAccount, setUserAccount] = useState(UserAccountContext);
+    const {userAccount, setUserAccount} = useUserContext();
     const router = useRouter()
 
     useEffect(() => {
-        console.log("Global place login", userAccount);
+        console.log("login userAccount object", userAccount);
     }, [userAccount]); // userAccount가 업데이트될 때만 실행됩니다.
 
     const handleLogin = async (e) => {
@@ -46,9 +46,12 @@ const AuthPage = () => {
             setEmail(DBuserAccount.email);
             setGender(DBuserAccount.gender);
             setUserHashtags(DBuserAccount.userHashtags);
+
+            // const jsonuserAccount = JSON.stringify(DBuserAccount)
             setUserAccount(DBuserAccount)
-            const jsonuserAccount = JSON.stringify(DBuserAccount)
-            console.log("josn",jsonuserAccount)
+            // const jsonuserAccount = JSON.stringify(DBuserAccount)
+            // console.log("josn",jsonuserAccount)
+
 
 
 

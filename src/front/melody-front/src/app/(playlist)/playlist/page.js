@@ -2,37 +2,53 @@
 import React, { useEffect, useState, useContext } from 'react';
 import Link from 'next/link';
 import {data} from "autoprefixer";
-import { UserAccountContext } from "./../../../components/UserAccountContext";
+import  {UserAccountContext}  from "./../../../components/UserAccountContext";
 import { useRouter } from 'next/navigation'
 import { usePathname, useSearchParams } from 'next/navigation'
+import {useUserContext} from "./../../Context/userAccount"
+import axios from "axios";
 
 
 function Playlist   () {
-    const [useraccount_id, setUseraccount_id] = useState('')
+    const userAccountId = useUserContext()
+    const [playlistName, setPlaylistName] = useState('');
+    const [description, setDescription] = useState('');
+    const [createdDate, setCreatedDate] = useState('');
+    const [playlistHashtags, setPlaylistHashtags] = useState('');
+
     const [playlists, setPlaylists] = useState([]);
 
-    const { userAccount } = useContext(UserAccountContext);
+    // const  userAccount  = useContext(UserAccountContext);
+    const {userAccount,setUserAccount} = useUserContext()
+
+    const playlist = {
+        userAccountId,
+        playlistName,
+        description,
+        createdDate,
+        playlistHashtags
+    };
 
     useEffect(() => {
-        console.log("Global place playlist", userAccount);
+        console.log("playlist userAccount object", userAccount);
 
     }, []);
 
-    // useEffect(()=>{
-    //     fetch("/api/playlist",{
-    //         method:"POST",
-    //         headers: {
-    //             "Content-type": "application/json",
-    //         },
-    //         body: JSON.stringify(useraccount_id),
-    //     }).then((res) => res.json())
-    //         .then(data => {
-    //             console.log(data)
-    //             console.log(typeof data)
-    //             setPlaylists(data);
-    //         })
-    //
-    // },[])
+    const getPlaylistsByUserAccountId = async (e) =>{
+        try {
+            const response = await axios.get(`/api/playlist/${}`, {
+                params: {
+                    id: userAccountId,
+                },
+            });
+            const DBplaylists = response.data;
+            console.log(DBplaylists);
+
+        } catch (error) {
+            console.error('playlist 리스트 실패', error);
+        }
+
+    }
 
     return (
         <>
@@ -40,11 +56,11 @@ function Playlist   () {
             <Link href="/createPlaylist">Create Playlist</Link>
 
             <div>
-                <ul>
-                    {/*{playlists.map((playlist, index) => (*/}
-                    {/*    <li key={index}>{playlist}</li>*/}
-                    {/*))}*/}
-                </ul>
+                {/*<ul>*/}
+                {/*    {playlists.map((playlist, index) => (*/}
+                {/*        <li key={index}>{playlist}</li>*/}
+                {/*    ))}*/}
+                {/*</ul>*/}
             </div>
         </>
     );

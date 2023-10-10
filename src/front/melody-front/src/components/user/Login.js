@@ -2,7 +2,8 @@
 import {createContext, useContext, useEffect, useState} from "react";
 import axios from "axios";
 // import {UserAccountContext} from "./../../../components/UserAccountContext"
-import {UserAccountContext} from "./../UserAccountContext"
+// import {UserAccountContext} from "./../UserAccountContext"
+import UserAccountContext from "./../UserAccountContext";
 
 const AuthPage = () => {
     const [userAccountId, setUserAccountId] = useState(0);
