@@ -4,10 +4,12 @@ import com.acorn.melody2.entity.Playlist;
 import com.acorn.melody2.service.PlaylistService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -23,12 +25,22 @@ public class PlaylistController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Playlist> getPlaylistById(@PathVariable Long id) {
+    public ResponseEntity<Playlist> getPlaylistById(@PathVariable int id) {
         System.out.println("Received ID: " + id);
         Optional<Playlist> playlist = playlistService.getPlaylistById(id);
         return playlist.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/playlist/{id}")
+    public ResponseEntity<List<Playlist>> getPlaylistsByuserAccountId(@PathVariable int id) {
+        logger.warn(String.valueOf(id));
+        List<Playlist> playlists = playlistService.getPlaylistsByuserAccountId(id);
+        if(playlists.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(playlists, HttpStatus.OK);
+        }
+    }
 
     @PostMapping
     public ResponseEntity<Playlist> createPlaylist(@RequestBody Playlist playlist) {

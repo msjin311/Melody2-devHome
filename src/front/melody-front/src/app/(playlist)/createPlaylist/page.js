@@ -1,6 +1,7 @@
 "use client"
 import React, {useContext, useEffect, useState} from 'react';
 import {useUserContext} from "./../../Context/userAccount"
+import { useRouter } from 'next/navigation'
 
 function Playlistform(props) {
     // Define state variables for form fields
@@ -11,6 +12,8 @@ function Playlistform(props) {
     const [description, setDescription] = useState('');
     const [createdDate, setCreatedDate] = useState('');
     const [playlistHashtags, setPlaylistHashtags] = useState('');
+
+    const router = useRouter();
 
 
     useEffect(() => {
@@ -65,10 +68,12 @@ function Playlistform(props) {
                 console.log("유저어카운트",props.userAccountId)
                 console.log(playlist)
                 alert('create playlist successfully')
+                router.push('/playlist')
+
             } else {
                 console.log("유저어카운트",props.userAccountId)
                 console.log(playlist)
-               alert('failed playlist Please try again')
+                alert('failed playlist Please try again')
             }
 
 

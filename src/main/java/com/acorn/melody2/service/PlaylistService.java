@@ -26,6 +26,10 @@ public class PlaylistService {
         return playlistRepository.findById(id);
     }
 
+    public List<Playlist> getPlaylistsByuserAccountId(int id) {
+        return playlistRepository.findByuserAccountId(id);
+    }
+
     public Playlist savePlaylist(Playlist playlist) {
         return playlistRepository.save(playlist);
     }

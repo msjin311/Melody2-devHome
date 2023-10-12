@@ -75,7 +75,7 @@ const AuthPage = () => {
     <form onSubmit={handleLogin}>
         <input
             type="text"
-            placeholder="id"
+            placeholder="ID"
             className="px-4 py-2 border border-gray-300 rounded"
             onChange={(e) => setAccountId(e.target.value)}
         />
