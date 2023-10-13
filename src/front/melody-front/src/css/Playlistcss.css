@@ -1,0 +1,8 @@
+.button-wrapper {
+    display: flex; /* Flexbox를 사용하여 버튼과 이미지를 같은 라인에 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+}
+
+.button-wrapper button {
+    margin-left: 10px; /* 버튼과 이미지 사이의 간격 조절 (원하는 간격으로 조정) */
+}

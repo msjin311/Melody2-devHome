@@ -49,6 +49,11 @@ public class PlaylistController {
         return new ResponseEntity<>(savePlaylist, HttpStatus.CREATED);
     }
 
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePlaylist(@PathVariable int id) {
+        logger.warn("실행이 되는가?"+ id);
+        playlistService.deletePlaylist(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }
