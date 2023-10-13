@@ -89,6 +89,7 @@ function Playlist   () {
     const getPlaylistsByUserAccountId = (e) =>{
         axios.get(`/api/playlist/playlist/${userAccountId}`)
             .then(response =>{
+                setPlaylists(response.data)
                 console.log('playlist 리스트 성공')
             })
             .catch (error =>{
