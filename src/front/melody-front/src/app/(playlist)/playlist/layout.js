@@ -46,7 +46,7 @@ const Layout = ({ children }) => {
 
     return (
 
-        <div className="flex h-screen bg-gray-100">
+        <div className="flex h-screen bg-gray-100 justify-content-center">
             <div>
                 <div className={`menu-button ${isMenuOpen ? 'open' : ''}`} onClick={toggleMenu}>
                     <Image src={menuImg} alt="menu image" width={50}  />
