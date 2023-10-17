@@ -1,7 +1,7 @@
 'use client'
 import {createContext, useContext, useEffect, useState} from "react";
 import axios from "axios";
-import {useUserContext} from "./../../Context/userAccount"
+import {UserAccountContext} from "../../../components/UserAccountContext"
 // import { useNavigate } from 'react-router-dom';
 import Link from "next/link";
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
@@ -17,7 +17,7 @@ const AuthPage = () => {
     const [gender, setGender] = useState('Male');
     const [userHashtags, setUserHashtags] = useState('');
 
-    const {userAccount, setUserAccount} = useUserContext();
+    const { userAccount, setUserAccount } = useContext(UserAccountContext);
     const router = useRouter()
 
     useEffect(() => {

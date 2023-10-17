@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useContext, useTransition } from 'react';
 import Link from 'next/link';
 import {data} from "autoprefixer";
-import  {UserAccountContext}  from "./../../../components/UserAccountContext";
+import  {UserAccountContext}  from "../../../components/UserAccountContext";
 import { usePathname, useSearchParams } from 'next/navigation'
 import {useUserContext} from "./../../Context/userAccount"
 import axios from "axios";
@@ -13,7 +13,7 @@ import '../../../css/Playlistcss.css'
 
 function Playlist   () {
     // const  userAccount  = useContext(UserAccountContext);
-    const {userAccount,setUserAccount} = useUserContext()
+    const { userAccount, setUserAccount } = useContext(UserAccountContext);
     const userAccountId = userAccount.userAccountId
     const [playlistId, setPlaylistId] = useState(0);
     const [playlistName, setPlaylistName] = useState('');
