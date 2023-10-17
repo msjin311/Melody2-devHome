@@ -1,5 +1,6 @@
 package com.acorn.melody2.controller;
 
+import com.acorn.melody2.dto.UpdatePlaylistRequest;
 import com.acorn.melody2.entity.Playlist;
 import com.acorn.melody2.service.PlaylistService;
 import org.slf4j.Logger;
@@ -49,11 +50,16 @@ public class PlaylistController {
         return new ResponseEntity<>(savePlaylist, HttpStatus.CREATED);
     }
 
+    @PutMapping("/{id}")
+    public Playlist updatePlaylist(@RequestBody UpdatePlaylistRequest updatedPlaylist) {
+        logger.warn(String.valueOf(updatedPlaylist));
+        return playlistService.updatePlaylist(updatedPlaylist);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePlaylist(@PathVariable int id) {
         logger.warn("실행이 되는가?"+ id);
         playlistService.deletePlaylist(id);
         return ResponseEntity.noContent().build();
     }
-
 }

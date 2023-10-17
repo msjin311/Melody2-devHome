@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useContext, useTransition } from 'react';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation'
-import {useUserContext} from "../../../Context/userAccount"
+import {useUserContext} from "../../../../components/UserAccountContext"
 import axios from "axios";
 import Image from "next/image";
 import meatballMenu from '../../../img/meatballs-menu.svg'
@@ -82,6 +82,14 @@ function EditPlaylist   () {
                 console.error('playlist 리스트 실패', error);
                 setPlaylists([]);
             });
+    }
+
+    const editPlaylist = (props) => {
+        axios.put(`/api/playlist/${props}`)
+            .then(response =>{
+                if(response.data){
+                }
+            })
     }
 
     const deletePlaylist = (props) => {

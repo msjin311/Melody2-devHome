@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface PlaylistRepository extends JpaRepository<Playlist, Integer> {
     List<Playlist> findByuserAccountId(int userAccountId);
+
+    Playlist findById(Long id);
 }

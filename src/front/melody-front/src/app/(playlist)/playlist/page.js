@@ -9,6 +9,7 @@ import Image from "next/image";
 import meatballMenu from '../../img/meatballs-menu.svg'
 import plusImg from "../../img/plus.png";
 import '../../../css/Playlistcss.css'
+import EditModal from "../../../components/EditPlaylistModal";
 
 function Playlist   () {
     // const  userAccount  = useContext(UserAccountContext);
@@ -37,21 +38,40 @@ function Playlist   () {
         setPopupMenuOpen(updatedMenuOpen);
     };
 
+    //Edit window modal
+    const [editModalOpen, setEditModalOpen] = useState(false);
+
+    const openEditModal = () => {
+        setEditModalOpen(true);
+    }
+
+    const closeEditModal = () => {
+        setEditModalOpen(false);
+    }
+
+    //set playlist Form
+    useEffect(() => {
+        const createdDate = new Date().toISOString().slice(0, 10);
+        setCreatedDate(createdDate)
+    }, [createdDate]);
+
+    const handlePlaylist_name = (e) => {
+        setPlaylistName(e.target.value)
+    }
+
+    const handleDescription = (e) => {
+        setDescription(e.target.value)
+    }
+
+    const handlePlaylist_hashtags = (e) => {
+        setPlaylistHashtags(e.target.value)
+    }
 
     //구종
     const [isComponentVisible, setComponentVisible] = useState(false);
 
     const toggleComponentVisibility = () => {
         setComponentVisible(!isComponentVisible);
-    };
-
-    const playlist = {
-        playlistId,
-        userAccountId,
-        playlistName,
-        description,
-        createdDate,
-        playlistHashtags
     };
 
     // useEffect(() => {
@@ -105,7 +125,6 @@ function Playlist   () {
                 setPlaylists([]);
             });
     }
-
     const deletePlaylist = (props) => {
         axios.delete(`/api/playlist/${props}`)
             .then(response =>{
@@ -117,6 +136,28 @@ function Playlist   () {
             .catch(error => {
                 console.error('playlist delelte fail', error)
             })
+    }
+    const editPlaylist = (playlistId) => {
+        const updatePlaylistRequest = {
+            playlistId,
+            userAccountId,
+            playlistName,
+            description,
+            createdDate,
+            playlistHashtags,
+            userAccount
+        };
+        try{
+            axios.put(`/api/playlist/`, updatePlaylistRequest)
+                .then(response =>{
+                    console.log(updatePlaylistRequest)
+                    console.log('플레이리스트 업데이트 성공')
+                })
+
+        } catch (error) {
+            console.error('플레이리스트 수정 Error:', error);
+        }
+
     }
 
     return (
@@ -175,6 +216,46 @@ function Playlist   () {
                                         <li>Edit Playlist</li>
                                         <li>
                                             <span onClick={() => deletePlaylist(playlist.playlistId)}>Delete Playlist</span>
+                                        </li>
+                                        <li>
+                                            <div className="EditModal">
+                                                <button onClick={openEditModal}>Edit Playlist</button>
+                                                <EditModal isOpen={editModalOpen} onClose={closeEditModal} playlistId={playlist.playlistId}>
+                                                    <form onSubmit={(e) => {
+                                                        e.preventDefault(); // 기본 제출 동작을 막음
+                                                        editPlaylist(playlist.playlistId); // 폼 제출 로직 실행
+                                                        closeEditModal();
+                                                    }}>
+                                                        <h1>플레이리스트 수정</h1>
+
+                                                        <label>이름</label><br/>
+                                                        <input
+                                                            type="text"
+                                                            name="input_playlistName"
+                                                            onChange={handlePlaylist_name}
+                                                        /><br/>
+
+                                                        <label>설명</label><br/>
+                                                        <input
+                                                            type="text"
+                                                            name="input_description"
+                                                            onChange={handleDescription}
+                                                        /><br/>
+
+                                                        <label>해쉬태그</label><br/>
+                                                        <input
+                                                            type="text"
+                                                            name="input_playlist_hashtags"
+                                                            onChange={handlePlaylist_hashtags}
+                                                        /><br/><p/>
+
+                                                        <input
+                                                            type="submit"
+                                                            value="플레이리스트 수정"
+                                                        /><br/>
+                                                    </form>
+                                                </EditModal>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>

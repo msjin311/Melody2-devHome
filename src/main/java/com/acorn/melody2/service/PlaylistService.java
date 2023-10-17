@@ -1,5 +1,6 @@
 package com.acorn.melody2.service;
 
+import com.acorn.melody2.dto.UpdatePlaylistRequest;
 import com.acorn.melody2.entity.Playlist;
 import com.acorn.melody2.repository.PlaylistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,12 @@ public class PlaylistService {
 
     public Playlist savePlaylist(Playlist playlist) {
         return playlistRepository.save(playlist);
+    }
+
+    public Playlist updatePlaylist(Long id, Playlist updatedPlaylist) {
+        Playlist newPlaylist = playlistRepository.findById(id);
+        updatedPlaylist.setPlaylistId(id);
+        return playlistRepository.save(updatedPlaylist);
     }
 
     public void deletePlaylist(int id) {
