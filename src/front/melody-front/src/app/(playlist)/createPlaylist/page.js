@@ -1,11 +1,13 @@
 "use client"
 import React, {useContext, useEffect, useState} from 'react';
-import {useUserContext} from "./../../Context/userAccount"
+// import {UserAccountContext} from "../../../components/UserAccountContext"
+import {useUserContext} from "../../../components/UserAccountContext";
 import { useRouter } from 'next/navigation'
 
 function Playlistform(props) {
     // Define state variables for form fields
     // const [userAccountId, setUserAccountId] = useState(0); // useraccount_id를 상태로 변경
+    // const {userAccount, setUserAccount} = useContext(UserAccountContext);
     const {userAccount, setUserAccount} = useUserContext()
     const userAccountId = userAccount.userAccountId
     const [playlistName, setPlaylistName] = useState('');

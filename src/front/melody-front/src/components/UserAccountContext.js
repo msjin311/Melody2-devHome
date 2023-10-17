@@ -15,3 +15,4 @@ export const UserAccountContextProvider = ({ children }) => {
     );
 };
 
+export const useUserContext = () => useContext(UserAccountContext);

@@ -4,7 +4,6 @@ import Link from 'next/link';
 import {data} from "autoprefixer";
 import  {UserAccountContext}  from "../../../components/UserAccountContext";
 import { usePathname, useSearchParams } from 'next/navigation'
-import {useUserContext} from "./../../Context/userAccount"
 import axios from "axios";
 import Image from "next/image";
 import meatballMenu from '../../img/meatballs-menu.svg'
