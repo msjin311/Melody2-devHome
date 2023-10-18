@@ -171,6 +171,14 @@ function Playlist   () {
                 .then(response =>{
                     console.log('updateplaylistRequest',updatePlaylistRequest)
                     console.log('플레이리스트 업데이트 성공')
+                    setPlaylists((playlists) => {
+                        const updatedPlaylists = [...playlists];
+                        const index = updatedPlaylists.findIndex((playlist) => playlist.playlistId === playlistId);
+                        if (index !== -1) {
+                            updatedPlaylists[index] = response.data; // 업데이트된 플레이리스트로 교체
+                        }
+                        return updatedPlaylists;
+                    })
                 }).catch(error => {
                 console.error('플레이리스트 수정 Error:', error);
             })
