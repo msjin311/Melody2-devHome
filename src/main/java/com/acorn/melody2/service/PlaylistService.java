@@ -23,11 +23,11 @@ public class PlaylistService {
         return playlistRepository.findAll();
     }
 
-    public Optional<Playlist> getPlaylistById(int id) {
+    public Optional<Playlist> getPlaylistById(Long id) {
         return playlistRepository.findById(id);
     }
 
-    public List<Playlist> getPlaylistsByuserAccountId(int id) {
+    public List<Playlist> getPlaylistsByuserAccountId(Long id) {
         return playlistRepository.findByuserAccountId(id);
     }
 
@@ -36,12 +36,25 @@ public class PlaylistService {
     }
 
     public Playlist updatePlaylist(Long id, Playlist updatedPlaylist) {
-        Playlist newPlaylist = playlistRepository.findById(id);
-        updatedPlaylist.setPlaylistId(id);
-        return playlistRepository.save(updatedPlaylist);
+//        Playlist newPlaylist = playlistRepository.findById(id);
+//        Optional<Playlist> newPlaylist = playlistRepository.findById(id);
+//        updatedPlaylist.setPlaylistId(id);
+//        return playlistRepository.save(updatedPlaylist);
+        Optional<Playlist> existingPlaylist = playlistRepository.findById(id);
+        if (existingPlaylist.isPresent()) {
+            Playlist playlistToUpdate = existingPlaylist.get();
+            playlistToUpdate.setPlaylistId(id);
+            playlistToUpdate.setPlaylistName(updatedPlaylist.getPlaylistName());
+            playlistToUpdate.setDescription(updatedPlaylist.getDescription());
+            playlistToUpdate.setPlaylistHashtags(updatedPlaylist.getPlaylistHashtags());
+            return playlistRepository.save(playlistToUpdate);
+        } else {
+            return null;
+        }
+
     }
 
-    public void deletePlaylist(int id) {
+    public void deletePlaylist(Long id) {
         playlistRepository.deleteById(id);
     }
 }

@@ -20,20 +20,21 @@ public class PlaylistController {
 
     private final PlaylistService playlistService;
 
+    @Autowired
     public PlaylistController(PlaylistService playlistService) {
         this.playlistService = playlistService;
     }
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Playlist> getPlaylistById(@PathVariable int id) {
+    public ResponseEntity<Playlist> getPlaylistById(@PathVariable Long id) {
         System.out.println("Received ID: " + id);
         Optional<Playlist> playlist = playlistService.getPlaylistById(id);
         return playlist.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/playlist/{id}")
-    public ResponseEntity<List<Playlist>> getPlaylistsByuserAccountId(@PathVariable int id) {
+    public ResponseEntity<List<Playlist>> getPlaylistsByuserAccountId(@PathVariable Long id) {
         logger.warn(String.valueOf(id));
         List<Playlist> playlists = playlistService.getPlaylistsByuserAccountId(id);
         if(playlists.isEmpty()){
@@ -49,16 +50,19 @@ public class PlaylistController {
         Playlist savePlaylist = playlistService.savePlaylist(playlist);
         return new ResponseEntity<>(savePlaylist, HttpStatus.CREATED);
     }
-
-    @PutMapping("/{id}")
-    public Playlist updatePlaylist(@RequestBody UpdatePlaylistRequest updatedPlaylist) {
-        logger.warn(String.valueOf(updatedPlaylist));
-        return playlistService.updatePlaylist(updatedPlaylist);
+    @PutMapping
+    public Playlist updatePlaylist(@RequestBody UpdatePlaylistRequest updatedPlaylistRequest) {
+        logger.warn(String.valueOf(updatedPlaylistRequest));
+        Long playlistId = updatedPlaylistRequest.getPlaylist().getPlaylistId();
+        Playlist playlist = updatedPlaylistRequest.getPlaylist();
+        logger.warn(playlistId.toString());
+        logger.warn(playlist.toString());
+        return playlistService.updatePlaylist(playlistId,playlist);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePlaylist(@PathVariable int id) {
-        logger.warn("실행이 되는가?"+ id);
+    public ResponseEntity<Void> deletePlaylist(@PathVariable Long id) {
+        logger.warn("플레이르스트 삭제"+ id);
         playlistService.deletePlaylist(id);
         return ResponseEntity.noContent().build();
     }

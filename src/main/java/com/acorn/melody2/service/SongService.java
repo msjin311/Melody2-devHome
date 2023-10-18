@@ -91,7 +91,7 @@ public class SongService {
         return query.getResultList();
     }
 
-    public void addSongToPlaylist(int songId, int playlistId) {
+    public void addSongToPlaylist(int songId, Long playlistId) {
         Optional<Song> songOptional = songRepository.findById(songId);
         Optional<Playlist> playlistOptional = playlistRepository.findById(playlistId);
 
@@ -107,7 +107,7 @@ public class SongService {
         }
     }
 
-    public void removeSongFromPlaylist(int songId, int playlistId) {
+    public void removeSongFromPlaylist(int songId, Long playlistId) {
         Optional<Song> songOptional = songRepository.findById(songId);
         Optional<Playlist> playlistOptional = playlistRepository.findById(playlistId);
 

@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface PlaylistRepository extends JpaRepository<Playlist, Integer> {
-    List<Playlist> findByuserAccountId(int userAccountId);
+public interface PlaylistRepository extends JpaRepository<Playlist, Long> {
+    List<Playlist> findByuserAccountId(Long userAccountId);
 
-    Playlist findById(Long id);
+//    Playlist findById(Long id);
 }

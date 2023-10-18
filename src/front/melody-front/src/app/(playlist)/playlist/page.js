@@ -23,6 +23,15 @@ function Playlist   () {
 
     const [playlists, setPlaylists] = useState([]);
 
+    // const playlist = {
+    //     playlistId,
+    //     userAccountId,
+    //     playlistName,
+    //     description,
+    //     createdDate,
+    //     playlistHashtags
+    // };
+
     //popup menu sector
     const [popMenuOpen, setPopupMenuOpen] = useState(Array(playlists.length).fill(false));
 
@@ -137,25 +146,37 @@ function Playlist   () {
                 console.error('playlist delelte fail', error)
             })
     }
-    const editPlaylist = (playlistId) => {
-        const updatePlaylistRequest = {
+
+    const editPlaylist = (inputPlaylistId) => {
+        const playlistId = inputPlaylistId
+        console.log(playlistId)
+        console.log('이거',inputPlaylistId, typeof inputPlaylistId);
+
+        const playlist = {
             playlistId,
             userAccountId,
             playlistName,
             description,
             createdDate,
-            playlistHashtags,
+            playlistHashtags
+        };
+
+        const updatePlaylistRequest = {
+            playlist,
             userAccount
         };
+
         try{
-            axios.put(`/api/playlist/`, updatePlaylistRequest)
+            axios.put(`/api/playlist`, updatePlaylistRequest)
                 .then(response =>{
-                    console.log(updatePlaylistRequest)
+                    console.log('updateplaylistRequest',updatePlaylistRequest)
                     console.log('플레이리스트 업데이트 성공')
-                })
+                }).catch(error => {
+                console.error('플레이리스트 수정 Error:', error);
+            })
 
         } catch (error) {
-            console.error('플레이리스트 수정 Error:', error);
+            console.error('플레이리스트 무슨 수정 Error:', error);
         }
 
     }
