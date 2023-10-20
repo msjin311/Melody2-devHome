@@ -2,7 +2,9 @@ package com.acorn.melody2.controller;
 
 import com.acorn.melody2.dto.UpdatePlaylistRequest;
 import com.acorn.melody2.entity.Playlist;
+import com.acorn.melody2.entity.SongPlaylist;
 import com.acorn.melody2.service.PlaylistService;
+import com.acorn.melody2.service.SongPlaylistService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +21,14 @@ public class PlaylistController {
     private static final Logger logger = LoggerFactory.getLogger(PlaylistController.class);
 
     private final PlaylistService playlistService;
+    private final SongPlaylistService songPlaylistService;
 
     @Autowired
-    public PlaylistController(PlaylistService playlistService) {
+    public PlaylistController(PlaylistService playlistService, SongPlaylistService songPlaylistService) {
         this.playlistService = playlistService;
+        this.songPlaylistService = songPlaylistService;
     }
+
 
 
     @GetMapping("/{id}")
@@ -66,4 +71,22 @@ public class PlaylistController {
         playlistService.deletePlaylist(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/addSong")
+    public SongPlaylist addSongToPlaylist(@RequestBody SongPlaylist songPlaylist) {
+        logger.warn(songPlaylist.toString());
+        int playlistId = songPlaylist.getPlaylistId();
+        int songId = songPlaylist.getSongId();
+        return songPlaylistService.addSongToPlaylist(playlistId, songId);
+    }
+
+    @PostMapping("/deleteSong")
+    public SongPlaylist deleteSongFromPlaylist (){
+
+        return null;
+    }
+
+    @GetMapping("/songs/{id}")
+    public Playlist getSongsById(@PathVariable Long id){ return playlistService.getSongsByPlaylistId(id); }
+
 }
