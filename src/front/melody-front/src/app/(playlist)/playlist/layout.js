@@ -67,7 +67,7 @@ const Layout = ({ children }) => {
             {/*</div>*/}
 
             {/* Main Content */}
-            <div className="w-3/4 p-6">
+            <div className="w-100 p-6">
                 {/*/!* Header *!/*/}
                 {/*<header className="bg-white p-4 mb-4 shadow grid grid-cols-2">*/}
                 {/*    /!* Header content goes here *!/*/}

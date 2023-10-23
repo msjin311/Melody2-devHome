@@ -215,11 +215,11 @@ function Playlist   () {
                 </div>
             </header> {/*<button onClick={closeModal}>Close Modal</button>*/}
 
-            <div className="bg-white p-4 mb-4 shadow grid grid-cols-2">
+            <div className="bg-white p-4 mb-4 shadow">
                 <h1>Playlists Page</h1><p/>
                 <div>
                     <ul>
-                        <div className="button-wrapper flex justify-content-between">
+                        <div className="button-wrapper justify-content-between">
                             <div>#</div>
                             <div>Name</div>
                             <div>Description</div>
@@ -229,7 +229,7 @@ function Playlist   () {
                         {playlists.map((playlist, index) => (
                             <li key={index}>
                                 {/*{playlist.playlistName}*/}
-                                <div className="button-wrapper flex justify-content-between">
+                                <div className="button-wrapper justify-content-between">
                                     <div>{index}</div>
                                     <Link
                                         key={index}
