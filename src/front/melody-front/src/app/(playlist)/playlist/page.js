@@ -14,6 +14,7 @@ import EditModal from "../../../components/EditPlaylistModal";
 function Playlist   () {
     // const  userAccount  = useContext(UserAccountContext);
     const { userState, userDispatch } = useContext(UserContext);
+    const userAccount = userState.user
     const userAccountId = userState.user.userAccountId;
     const [playlistId, setPlaylistId] = useState(0);
     const [playlistName, setPlaylistName] = useState('');
