@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useContext, useTransition } from 'react';
 import Link from 'next/link';
 import {data} from "autoprefixer";
-import  {UserAccountContext}  from "../../../components/UserAccountContext";
+import  { UserContext }  from "../../../contexts/UserContext";
 import { usePathname, useSearchParams } from 'next/navigation'
 import axios from "axios";
 import Image from "next/image";
@@ -13,8 +13,8 @@ import EditModal from "../../../components/EditPlaylistModal";
 
 function Playlist   () {
     // const  userAccount  = useContext(UserAccountContext);
-    const { userAccount, setUserAccount } = useContext(UserAccountContext);
-    const userAccountId = userAccount.userAccountId
+    const { userState, userDispatch } = useContext(UserContext);
+    const userAccountId = userState.user.userAccountId;
     const [playlistId, setPlaylistId] = useState(0);
     const [playlistName, setPlaylistName] = useState('');
     const [description, setDescription] = useState('');
