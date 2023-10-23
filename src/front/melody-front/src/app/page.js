@@ -15,7 +15,6 @@ const Home = () => {
 
     return (
         <>
-            <UserAccountContextProvider>
                 <div>
                     <h1>Server Component</h1>
                     <ClientComponent />
@@ -28,7 +27,6 @@ const Home = () => {
                     {/*<Login/>*/}
                     {/*<Playlist/>*/}
                 </div>
-            </UserAccountContextProvider>
         </>
     );
 };
