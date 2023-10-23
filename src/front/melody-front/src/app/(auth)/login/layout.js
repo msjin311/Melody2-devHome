@@ -1,104 +1,90 @@
-'use client'
-import {createContext, useContext, useEffect, useState} from "react";
-import axios from "axios";
-import {UserAccountContext} from "../../../components/UserAccountContext"
-// import { useNavigate } from 'react-router-dom';
-import Link from "next/link";
-import { useRouter, usePathname, useSearchParams } from 'next/navigation'
-
+"use client"
+import {useContext, useEffect, useState} from "react";
+import {UserContext} from "../../../contexts/UserContext";
 
 const AuthPage = () => {
-    const [userAccountId, setUserAccountId] = useState(0);
+    const { userState, userDispatch } = useContext(UserContext);
     const [accountId, setAccountId] = useState('');
     const [password, setPassword] = useState('');
-    const [name, setName] = useState('');
-    const [birthDate, setBirthDate] = useState('');
-    const [email, setEmail] = useState('');
-    const [gender, setGender] = useState('Male');
-    const [userHashtags, setUserHashtags] = useState('');
 
-    const { userAccount, setUserAccount } = useContext(UserAccountContext);
-    const router = useRouter()
-
-    useEffect(() => {
-        console.log("login userAccount object", userAccount);
-    }, [userAccount]); // userAccount가 업데이트될 때만 실행됩니다.
-
-    const handleLogin = async (e) => {
-        e.preventDefault()
-
-        try{
-            const response = await axios.get('/api/user-accounts/login',{
-                params: {
-                    id: accountId,
-                    password: password,
-                },
-            })
-
-            //로그인 성공
-            const DBuserAccount = response.data;
-            alert('로그인 성공');
-            console.log('로그인 성공:', DBuserAccount);
-
-            setUserAccountId(DBuserAccount.userAccountId);
-            setName(DBuserAccount.name);
-            setBirthDate(DBuserAccount.birthDate);
-            setEmail(DBuserAccount.email);
-            setGender(DBuserAccount.gender);
-            setUserHashtags(DBuserAccount.userHashtags);
-
-            // const jsonuserAccount = JSON.stringify(DBuserAccount)
-            setUserAccount(DBuserAccount)
-            // const jsonuserAccount = JSON.stringify(DBuserAccount)
-            // console.log("josn",jsonuserAccount)
-
-
-
-
-        } catch (error) {
-            //로그인 실패
-            console.error('로그인 실패', error)
-        }
-
+    const loginRequest = {
+        accountId,
+        password,
     }
 
 
-    return (
-    <div className="py-8">
-    <h1 className="text-3xl font-bold mb-4">Authentication Page</h1>
-    <div className="flex flex-col space-y-4">
-    {/*<input*/}
-    {/*    type="email"*/}
-    {/*placeholder="Email"*/}
-    {/*className="px-4 py-2 border border-gray-300 rounded"*/}
-    {/*/>*/}
-    <form onSubmit={handleLogin}>
-        <input
-            type="text"
-            placeholder="ID"
-            className="px-4 py-2 border border-gray-300 rounded"
-            onChange={(e) => setAccountId(e.target.value)}
-        />
-        <input
-            type="password"
-        placeholder="Password"
-        className="px-4 py-2 border border-gray-300 rounded"
-            onChange={(e) => setPassword(e.target.value)}
-        />
-        <input
-        className="px-4 py-2 bg-blue-500 text-white rounded"
-        type="submit"
-        />
-        <button className="px-4 py-2 bg-blue-500 text-white rounded">
-            Sign In
-        </button>
-    </form>
-        <button type="button" onClick={() => router.push('/playlist')}>
-            Playlist
-        </button>
-    </div>
-    </div>
-)
-}
+    useEffect(() => {
+        console.log("isAuthenticated : " + userState.isAuthenticated);
 
-export default AuthPage
+    }, [userState.isAuthenticated]);
+
+    useEffect(() => {
+        console.log("user : " + userState.user);
+
+    }, [userState.user]);
+
+    const handleLogin = async () => {
+        try {
+            // Perform an HTTP POST request to your Spring Boot login endpoint
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(loginRequest), // Replace with actual user input
+            });
+
+            if (response.ok) {
+                // Login successful
+                const userData = await response.json();
+                console.log(userData);
+                userDispatch({ type: 'LOGIN', payload: userData });
+                console.log(userState.isAuthenticated);
+            } else {
+                // Handle login error (e.g., show an error message)
+                console.error('Login failed');
+            }
+        } catch (error) {
+            // Handle network or other errors
+            console.error('An error occurred', error);
+        }
+    };
+
+    const handleLogout = () => {
+        // Replace this with your logout logic
+        userDispatch({ type: 'LOGOUT' });
+    };
+
+
+    return (
+        <div className="py-8">
+            <h1 className="text-3xl font-bold mb-4">Authentication Page</h1>
+            {userState.isAuthenticated ? (
+                <>
+                    <p>Welcome, {userState.user.name}!</p>
+                    <button onClick={handleLogout} className="px-4 py-2 bg-blue-500 text-white rounded">Logout</button>
+                </>
+            ) : (
+                <>
+                    <input
+                        type="text"
+                        placeholder="Account ID"
+                        className="px-4 py-2 border border-gray-300 rounded"
+                        onChange={(e) => setAccountId(e.target.value)}
+                    />
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        className="px-4 py-2 border border-gray-300 rounded"
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <button onClick={handleLogin} className="px-4 py-2 bg-blue-500 text-white rounded">
+                        Sign In
+                    </button>
+                </>
+            )}
+        </div>
+    );
+};
+
+export default AuthPage;

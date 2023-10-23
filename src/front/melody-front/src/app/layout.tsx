@@ -2,7 +2,7 @@ import './globals.css';
 import { Inter } from 'next/font/google';
 import Link from 'next/link';
 import Footer from '../components/global/footer';
-import {UserAccountContextProvider} from "../components/UserAccountContext"
+import { UserContextProvider } from "../contexts/UserContext";
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -39,7 +39,7 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
   return (
     <html lang="en">
     <body className={inter.className}>
-    <UserAccountContextProvider>
+    <UserContextProvider>
     <header>
       <div>
         <ul className="flex bg-slate-500">
@@ -55,7 +55,7 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
     </header>
     {children}
     <Footer />
-    </UserAccountContextProvider>
+    </UserContextProvider>
     </body>
     </html>
   );
