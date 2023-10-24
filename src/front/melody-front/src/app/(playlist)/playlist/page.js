@@ -220,17 +220,17 @@ function Playlist   () {
                 <h1>Playlists Page</h1><p/>
                 <div>
                     <ul>
-                        <div className="button-wrapper justify-content-between">
+                        <div className="button-wrapper">
                             <div>#</div>
                             <div>Name</div>
                             <div>Description</div>
                             <div>Hashtag</div>
-                            <div></div>
+                            <div className="button-meatball"></div>
                         </div>
                         {playlists.map((playlist, index) => (
-                            <li key={index}>
+                            <li key={index} className="">
                                 {/*{playlist.playlistName}*/}
-                                <div className="button-wrapper justify-content-between">
+                                <div className="button-wrapper">
                                     <div>{index}</div>
                                     <Link
                                         key={index}
@@ -241,74 +241,191 @@ function Playlist   () {
                                     <div>{playlist.description}</div>
                                     <div>{playlist.playlistHashtags}</div>
                                     {/*<button aria-haspopup="menu" data-testid="more-button" className="Button-sc-1dqy6lx-0 jVIpUU" aria-label="내 플레이리스트 #2에 대한 추가 옵션" data-encore-id="buttonTertiary" aria-expanded="false"><span aria-hidden="true" className="IconWrapper__Wrapper-sc-16usrgb-0 hYdsxw"><svg role="img" height="32" width="32" aria-hidden="true" viewBox="0 0 24 24" data-encore-id="icon" className="Svg-sc-ytk21e-0 haNxPq"><path d="M4.5 13.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm15 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm-7.5 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path></svg></span></button>*/}
+                                    {/*{popMenuOpen[index] && (*/}
+                                    {/*    <div className="popup-menu">*/}
+                                    {/*        <ul>*/}
+                                    {/*            <li>*/}
+                                    {/*                <div className="EditModal">*/}
+                                    {/*                    <button onClick={openEditModal}>Edit Playlist</button>*/}
+                                    {/*                    <EditModal isOpen={editModalOpen} onClose={closeEditModal} playlistId={playlist.playlistId}>*/}
+                                    {/*                        <form onSubmit={(e) => {*/}
+                                    {/*                            e.preventDefault(); // 기본 제출 동작을 막음*/}
+                                    {/*                            editPlaylist(playlist.playlistId); // 폼 제출 로직 실행*/}
+                                    {/*                            closeEditModal();*/}
+                                    {/*                        }}>*/}
+                                    {/*                            <div className="editmodal-header-grid">*/}
+                                    {/*                                <h1 className="editH">*/}
+                                    {/*                                    플레이리스트 수정*/}
+                                    {/*                                </h1>*/}
+                                    {/*                                <button onClick={closeEditModal} className="close-button">*/}
+                                    {/*                                    <Image alt="noimage" src={CloseImg} width={50} height={50} />*/}
+                                    {/*                                </button>*/}
+                                    {/*                            </div>*/}
+                                    {/*                            <p/>*/}
+                                    {/*                            <div>*/}
+                                    {/*                                <label>이름</label><br/>*/}
+                                    {/*                                <input*/}
+                                    {/*                                    type="text"*/}
+                                    {/*                                    name="input_playlistName"*/}
+                                    {/*                                    onChange={handlePlaylist_name}*/}
+                                    {/*                                /><br/>*/}
 
+                                    {/*                                <label>설명</label><br/>*/}
+                                    {/*                                <input*/}
+                                    {/*                                    type="text"*/}
+                                    {/*                                    name="input_description"*/}
+                                    {/*                                    onChange={handleDescription}*/}
+                                    {/*                                /><br/>*/}
+
+                                    {/*                                <label>해쉬태그</label><br/>*/}
+                                    {/*                                <input*/}
+                                    {/*                                    type="text"*/}
+                                    {/*                                    name="input_playlist_hashtags"*/}
+                                    {/*                                    onChange={handlePlaylist_hashtags}*/}
+                                    {/*                                /><br/><p/>*/}
+                                    {/*                            </div>*/}
+                                    {/*                            <div className="editModalBottom">*/}
+                                    {/*                                <input*/}
+                                    {/*                                    type="submit"*/}
+                                    {/*                                    value="저장하기"*/}
+                                    {/*                                /><br/>*/}
+                                    {/*                            </div>*/}
+                                    {/*                        </form>*/}
+                                    {/*                    </EditModal>*/}
+                                    {/*                </div>*/}
+                                    {/*            </li>*/}
+                                    {/*            <li>*/}
+                                    {/*                <span onClick={() => deletePlaylist(playlist.playlistId)}>Delete Playlist</span>*/}
+                                    {/*            </li>*/}
+                                    {/*        </ul>*/}
+                                    {/*    </div>*/}
+                                    {/*)}*/}
                                     {/*popup*/}
-                                    <div className="button-wrapper">
+                                    <div className="button-meatball">
                                         <button onClick={() => toggleMenu(index)}>
                                             <Image src={meatballMenu} alt="meatball" />
                                         </button>
+                                        {popMenuOpen[index] && (
+                                            <div className="popup-menu">
+                                                <ul>
+                                                    <li>
+                                                        <div className="EditModal">
+                                                            <button onClick={openEditModal}>Edit Playlist</button>
+                                                            <EditModal isOpen={editModalOpen} onClose={closeEditModal} playlistId={playlist.playlistId}>
+                                                                <form onSubmit={(e) => {
+                                                                    e.preventDefault(); // 기본 제출 동작을 막음
+                                                                    editPlaylist(playlist.playlistId); // 폼 제출 로직 실행
+                                                                    closeEditModal();
+                                                                }}>
+                                                                    <div className="editmodal-header-grid">
+                                                                        <h1 className="editH">
+                                                                            플레이리스트 수정
+                                                                        </h1>
+                                                                        <button onClick={closeEditModal} className="close-button">
+                                                                            <Image alt="noimage" src={CloseImg} width={50} height={50} />
+                                                                        </button>
+                                                                    </div>
+                                                                    <p/>
+                                                                    <div>
+                                                                        <label>이름</label><br/>
+                                                                        <input
+                                                                            type="text"
+                                                                            name="input_playlistName"
+                                                                            onChange={handlePlaylist_name}
+                                                                        /><br/>
+
+                                                                        <label>설명</label><br/>
+                                                                        <input
+                                                                            type="text"
+                                                                            name="input_description"
+                                                                            onChange={handleDescription}
+                                                                        /><br/>
+
+                                                                        <label>해쉬태그</label><br/>
+                                                                        <input
+                                                                            type="text"
+                                                                            name="input_playlist_hashtags"
+                                                                            onChange={handlePlaylist_hashtags}
+                                                                        /><br/><p/>
+                                                                    </div>
+                                                                    <div className="editModalBottom">
+                                                                        <input
+                                                                            type="submit"
+                                                                            value="저장하기"
+                                                                        /><br/>
+                                                                    </div>
+                                                                </form>
+                                                            </EditModal>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <span onClick={() => deletePlaylist(playlist.playlistId)}>Delete Playlist</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
 
-                                {popMenuOpen[index] && (
-                                    <div className="popup-menu">
-                                        <ul>
-                                            <li>
-                                                <div className="EditModal">
-                                                    <button onClick={openEditModal}>Edit Playlist</button>
-                                                    <EditModal isOpen={editModalOpen} onClose={closeEditModal} playlistId={playlist.playlistId}>
-                                                        <form onSubmit={(e) => {
-                                                            e.preventDefault(); // 기본 제출 동작을 막음
-                                                            editPlaylist(playlist.playlistId); // 폼 제출 로직 실행
-                                                            closeEditModal();
-                                                        }}>
-                                                            <div className="editmodal-header-grid">
-                                                                <h1 className="editH">
-                                                                    플레이리스트 수정
-                                                                </h1>
-                                                                <button onClick={closeEditModal} className="close-button">
-                                                                    <Image alt="noimage" src={CloseImg} width={50} height={50} />
-                                                                </button>
-                                                            </div>
-                                                            <p/>
-                                                            <div>
-                                                                <label>이름</label><br/>
-                                                                <input
-                                                                    type="text"
-                                                                    name="input_playlistName"
-                                                                    onChange={handlePlaylist_name}
-                                                                /><br/>
+                                {/*{popMenuOpen[index] && (*/}
+                                {/*    <div className="popup-menu">*/}
+                                {/*        <ul>*/}
+                                {/*            <li>*/}
+                                {/*                <div className="EditModal">*/}
+                                {/*                    <button onClick={openEditModal}>Edit Playlist</button>*/}
+                                {/*                    <EditModal isOpen={editModalOpen} onClose={closeEditModal} playlistId={playlist.playlistId}>*/}
+                                {/*                        <form onSubmit={(e) => {*/}
+                                {/*                            e.preventDefault(); // 기본 제출 동작을 막음*/}
+                                {/*                            editPlaylist(playlist.playlistId); // 폼 제출 로직 실행*/}
+                                {/*                            closeEditModal();*/}
+                                {/*                        }}>*/}
+                                {/*                            <div className="editmodal-header-grid">*/}
+                                {/*                                <h1 className="editH">*/}
+                                {/*                                    플레이리스트 수정*/}
+                                {/*                                </h1>*/}
+                                {/*                                <button onClick={closeEditModal} className="close-button">*/}
+                                {/*                                    <Image alt="noimage" src={CloseImg} width={50} height={50} />*/}
+                                {/*                                </button>*/}
+                                {/*                            </div>*/}
+                                {/*                            <p/>*/}
+                                {/*                            <div>*/}
+                                {/*                                <label>이름</label><br/>*/}
+                                {/*                                <input*/}
+                                {/*                                    type="text"*/}
+                                {/*                                    name="input_playlistName"*/}
+                                {/*                                    onChange={handlePlaylist_name}*/}
+                                {/*                                /><br/>*/}
 
-                                                                <label>설명</label><br/>
-                                                                <input
-                                                                    type="text"
-                                                                    name="input_description"
-                                                                    onChange={handleDescription}
-                                                                /><br/>
+                                {/*                                <label>설명</label><br/>*/}
+                                {/*                                <input*/}
+                                {/*                                    type="text"*/}
+                                {/*                                    name="input_description"*/}
+                                {/*                                    onChange={handleDescription}*/}
+                                {/*                                /><br/>*/}
 
-                                                                <label>해쉬태그</label><br/>
-                                                                <input
-                                                                    type="text"
-                                                                    name="input_playlist_hashtags"
-                                                                    onChange={handlePlaylist_hashtags}
-                                                                /><br/><p/>
-                                                            </div>
-                                                            <div className="editModalBottom">
-                                                                <input
-                                                                    type="submit"
-                                                                    value="저장하기"
-                                                                /><br/>
-                                                            </div>
-                                                        </form>
-                                                    </EditModal>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <span onClick={() => deletePlaylist(playlist.playlistId)}>Delete Playlist</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                )}
+                                {/*                                <label>해쉬태그</label><br/>*/}
+                                {/*                                <input*/}
+                                {/*                                    type="text"*/}
+                                {/*                                    name="input_playlist_hashtags"*/}
+                                {/*                                    onChange={handlePlaylist_hashtags}*/}
+                                {/*                                /><br/><p/>*/}
+                                {/*                            </div>*/}
+                                {/*                            <div className="editModalBottom">*/}
+                                {/*                                <input*/}
+                                {/*                                    type="submit"*/}
+                                {/*                                    value="저장하기"*/}
+                                {/*                                /><br/>*/}
+                                {/*                            </div>*/}
+                                {/*                        </form>*/}
+                                {/*                    </EditModal>*/}
+                                {/*                </div>*/}
+                                {/*            </li>*/}
+                                {/*            <li>*/}
+                                {/*                <span onClick={() => deletePlaylist(playlist.playlistId)}>Delete Playlist</span>*/}
+                                {/*            </li>*/}
+                                {/*        </ul>*/}
+                                {/*    </div>*/}
+                                {/*)}*/}
 
                                 {/* 이벤트를 사용하여 메뉴를 닫을 수 있도록 */}
                                 <div onClick={() => closeMenu(index)} className={popMenuOpen[index] ? "overlay" : ""}></div>
