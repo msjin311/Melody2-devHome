@@ -34,9 +34,11 @@ function DeleteSongFromPlaylist({ playlistId, songId, onDeleteSuccess }) {
     }
 
     return (
-        <div className="">
-            <Image onClick={deleteSong} src={CloseImg} alt="noImage"></Image>
-        </div>
+        <>
+            <div className="">
+                <Image onClick={deleteSong} src={CloseImg} alt="noImage"></Image>
+            </div>
+        </>
     );
 }
 

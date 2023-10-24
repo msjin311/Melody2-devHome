@@ -7,11 +7,9 @@ import Link from "next/link";
 import Image from "next/image";
 import "../../../../../public/css/playlistdetail.css"
 import plusImg from "../../../../app/img/plus.png";
-import CloseImg from "../../../img/close_111152.png"
-import meatballMenu from "../../../../app/img/meatballs-menu.svg";
-import EditModal from "../../../..//components/EditPlaylistModal";
 import axios from "axios";
 import DeleteSongFromPlaylist from "../../../../components/playlist/DeleteSongFromPlaylist";
+import AddSongToPlaylist from "../../../../components/playlist/addSongToPlaylist";
 
 
 function PlaylistDatail( ) {
@@ -31,6 +29,7 @@ function PlaylistDatail( ) {
     console.log('searchparams',searchParams)
     console.log('params',params)
     console.log('playlistId 변수', playlistId)
+    console.log('songId', songId)
     console.log("songs",playlist.songs)
 
     const getSongsById = (playlistId) => {
@@ -104,10 +103,10 @@ function PlaylistDatail( ) {
                 {/*))}*/}
                 {/*</div>*/}
 
+                {/*Usage example*/}
+                {/*<AddSongToPlaylist playlistId={playlistId} songId={songId}></AddSongToPlaylist>*/}
+
             </div>
-
-
-
         </>
         )
 }
