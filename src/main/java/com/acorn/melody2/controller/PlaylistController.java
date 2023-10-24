@@ -81,9 +81,12 @@ public class PlaylistController {
     }
 
     @PostMapping("/deleteSong")
-    public SongPlaylist deleteSongFromPlaylist (){
-
-        return null;
+    public ResponseEntity<Void> deleteSongFromPlaylist (@RequestBody SongPlaylist songPlaylist){
+        logger.warn(songPlaylist.toString());
+        int songId = songPlaylist.getSongId();
+        int playlistId = songPlaylist.getPlaylistId();
+        songPlaylistService.removeSongFromPlaylist(playlistId, songId);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/songs/{id}")

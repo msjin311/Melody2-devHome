@@ -11,6 +11,7 @@ import CloseImg from "../../../img/close_111152.png"
 import meatballMenu from "../../../../app/img/meatballs-menu.svg";
 import EditModal from "../../../..//components/EditPlaylistModal";
 import axios from "axios";
+import DeleteSongFromPlaylist from "../../../../components/playlist/DeleteSongFromPlaylist";
 
 
 function PlaylistDatail( ) {
@@ -23,11 +24,14 @@ function PlaylistDatail( ) {
 
 
     const [playlistId, setPlaylistId] = useState(0);
+    const [songId, setSongId] = useState(0);
     const [playlist, setPlaylist] = useState([]);
+    const [songs, setSongs] = useState([]);
     console.log('path',path);
     console.log('searchparams',searchParams)
     console.log('params',params)
     console.log('playlistId 변수', playlistId)
+    console.log("songs",playlist.songs)
 
     const getSongsById = (playlistId) => {
         axios.get(`/api/playlist/songs/${playlistId}`)
@@ -52,10 +56,10 @@ function PlaylistDatail( ) {
         getSongsById(params.playlistId)
     }, [params.playlistId, path, searchParams]);
 
-    const deleteSong = () => {
-
-    }
-
+    const handleDeleteSuccess = () => {
+        // 삭제 성공 시, 플레이리스트 데이터를 다시 불러와서 상태를 업데이트
+        getSongsById(playlistId);
+    };
 
     return(
         <>
@@ -84,7 +88,8 @@ function PlaylistDatail( ) {
                             <span>Group: {song.artist.groupName}</span>
                             <span>Artist: {song.soloArtist.singerName}</span>
                             <span>Song Info: {song.songInfo}</span>
-                            <span className="deleteSongButton"><Image src={CloseImg} alt="noimage"></Image></span>
+                            {/*<span className="deleteSongButton"><Image src={CloseImg} alt="noimage"></Image></span>*/}
+                            <span className="deleteSongButton"><DeleteSongFromPlaylist playlistId={playlistId} songId={song.songId} onDeleteSuccess={handleDeleteSuccess} ></DeleteSongFromPlaylist></span>
                         </li>
                     ))}
                 </ul>
