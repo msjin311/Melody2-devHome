@@ -14,11 +14,10 @@
 /* 모달 컨테이너 */
 .edit-modal {
     background: #fff;
-    padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    width: 400px;
-    max-width: 90%;
+    width: 25%;
+    padding: 10px;
 }
 
 /* 모달 내용 */
@@ -47,6 +46,7 @@
 }
 
 /* "플레이리스트 수정" 버튼 스타일 */
+
 input[type="submit"] {
     background: #007bff; /* 예시로 파란색 배경을 사용합니다. */
     color: #fff;
