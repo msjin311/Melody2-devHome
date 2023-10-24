@@ -10,6 +10,7 @@ import meatballMenu from '../../img/meatballs-menu.svg'
 import plusImg from "../../img/plus.png";
 import '../../../css/Playlistcss.css'
 import EditModal from "../../../components/EditPlaylistModal";
+import CloseImg from "../../img/close_111152.png";
 
 function Playlist   () {
     // const  userAccount  = useContext(UserAccountContext);
@@ -252,10 +253,6 @@ function Playlist   () {
                                 {popMenuOpen[index] && (
                                     <div className="popup-menu">
                                         <ul>
-                                            <li>Edit Playlist</li>
-                                            <li>
-                                                <span onClick={() => deletePlaylist(playlist.playlistId)}>Delete Playlist</span>
-                                            </li>
                                             <li>
                                                 <div className="EditModal">
                                                     <button onClick={openEditModal}>Edit Playlist</button>
@@ -265,36 +262,49 @@ function Playlist   () {
                                                             editPlaylist(playlist.playlistId); // 폼 제출 로직 실행
                                                             closeEditModal();
                                                         }}>
-                                                            <h1>플레이리스트 수정</h1>
+                                                            <div className="editmodal-header-grid">
+                                                                <h1 className="editH">
+                                                                    플레이리스트 수정
+                                                                </h1>
+                                                                <button onClick={closeEditModal} className="close-button">
+                                                                    <Image alt="noimage" src={CloseImg} width={50} height={50} />
+                                                                </button>
+                                                            </div>
+                                                            <p/>
+                                                            <div>
+                                                                <label>이름</label><br/>
+                                                                <input
+                                                                    type="text"
+                                                                    name="input_playlistName"
+                                                                    onChange={handlePlaylist_name}
+                                                                /><br/>
 
-                                                            <label>이름</label><br/>
-                                                            <input
-                                                                type="text"
-                                                                name="input_playlistName"
-                                                                onChange={handlePlaylist_name}
-                                                            /><br/>
+                                                                <label>설명</label><br/>
+                                                                <input
+                                                                    type="text"
+                                                                    name="input_description"
+                                                                    onChange={handleDescription}
+                                                                /><br/>
 
-                                                            <label>설명</label><br/>
-                                                            <input
-                                                                type="text"
-                                                                name="input_description"
-                                                                onChange={handleDescription}
-                                                            /><br/>
-
-                                                            <label>해쉬태그</label><br/>
-                                                            <input
-                                                                type="text"
-                                                                name="input_playlist_hashtags"
-                                                                onChange={handlePlaylist_hashtags}
-                                                            /><br/><p/>
-
-                                                            <input
-                                                                type="submit"
-                                                                value="플레이리스트 수정"
-                                                            /><br/>
+                                                                <label>해쉬태그</label><br/>
+                                                                <input
+                                                                    type="text"
+                                                                    name="input_playlist_hashtags"
+                                                                    onChange={handlePlaylist_hashtags}
+                                                                /><br/><p/>
+                                                            </div>
+                                                            <div className="editModalBottom">
+                                                                <input
+                                                                    type="submit"
+                                                                    value="저장하기"
+                                                                /><br/>
+                                                            </div>
                                                         </form>
                                                     </EditModal>
                                                 </div>
+                                            </li>
+                                            <li>
+                                                <span onClick={() => deletePlaylist(playlist.playlistId)}>Delete Playlist</span>
                                             </li>
                                         </ul>
                                     </div>
