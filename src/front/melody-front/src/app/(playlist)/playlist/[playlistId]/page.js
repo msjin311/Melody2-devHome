@@ -5,10 +5,13 @@ import { usePathname, useSearchParams } from "next/navigation"
 import { useParams } from 'next/navigation'
 import Link from "next/link";
 import Image from "next/image";
+import "../../../../../public/css/playlistdetail.css"
 import plusImg from "../../../../app/img/plus.png";
+import CloseImg from "../../../img/close_111152.png"
 import meatballMenu from "../../../../app/img/meatballs-menu.svg";
 import EditModal from "../../../..//components/EditPlaylistModal";
 import axios from "axios";
+
 
 function PlaylistDatail( ) {
     const path = usePathname();
@@ -24,6 +27,7 @@ function PlaylistDatail( ) {
     console.log('path',path);
     console.log('searchparams',searchParams)
     console.log('params',params)
+    console.log('playlistId 변수', playlistId)
 
     const getSongsById = (playlistId) => {
         axios.get(`/api/playlist/songs/${playlistId}`)
@@ -48,6 +52,10 @@ function PlaylistDatail( ) {
         getSongsById(params.playlistId)
     }, [params.playlistId, path, searchParams]);
 
+    const deleteSong = () => {
+
+    }
+
 
     return(
         <>
@@ -67,26 +75,29 @@ function PlaylistDatail( ) {
                     <Link href="/createPlaylist"><Image alt="noimage" src={plusImg} width={50} height={50}></Image></Link>
                 </div>
             </header>
-            <div className="bg-white p-4 mb-4 shadow grid grid-cols-2">
+            <div className="bg-white p-4 mb-4 shadow">
                 <h1>Songs</h1><br/>
-                {/*<ul>*/}
-                {/*    {playlist.songs.map((song, index) => (*/}
-                {/*        <li key={index}>*/}
-                {/*            <p>Title: {song.title}</p>*/}
-                {/*            <p>Song Info: {song.songInfo}</p>*/}
-                {/*        </li>*/}
-                {/*    ))}*/}
-                {/*</ul>*/}
-                <div>
-                {playlist.songs && playlist.songs.map(song => (
-                    <li key={song.songId}>
-                        <div className="flex space-x-32">
+                <ul className="songlist">
+                    {playlist.songs && playlist.songs.map((song, index) => (
+                        <li key={index}>
                             <span>Title: {song.title}</span>
-                            <span>Artist: {song.artist.groupName}</span>
-                        </div>
-                    </li>
-                ))}
-                </div>
+                            <span>Group: {song.artist.groupName}</span>
+                            <span>Artist: {song.soloArtist.singerName}</span>
+                            <span>Song Info: {song.songInfo}</span>
+                            <span className="deleteSongButton"><Image src={CloseImg} alt="noimage"></Image></span>
+                        </li>
+                    ))}
+                </ul>
+                {/*<div>*/}
+                {/*{playlist.songs && playlist.songs.map(song => (*/}
+                {/*    <li key={song.songId}>*/}
+                {/*        <div className="flex space-x-32">*/}
+                {/*            <span>Title: {song.title}</span>*/}
+                {/*            <span>Artist: {song.artist.groupName}</span>*/}
+                {/*        </div>*/}
+                {/*    </li>*/}
+                {/*))}*/}
+                {/*</div>*/}
 
             </div>
 
