@@ -11,6 +11,7 @@ import '../../../components/playlist/Playlistcss.css'
 import meatballMenu from '../../../../public/images/meatballs-menu.svg'
 import plusImg from "../../../../public/images/plus.png";
 import CloseImg from "../../../../public/images/close_111152.png";
+import SongPlaylist from "../../../components/playlist/SongPlaylist";
 
 function Playlist   () {
     // const  userAccount  = useContext(UserAccountContext);
@@ -242,6 +243,7 @@ function Playlist   () {
                                     </Link>
                                     <div>{playlist.description}</div>
                                     <div>{playlist.playlistHashtags}</div>
+                                    <SongPlaylist playlistId={playlist.playlistId} />
                                     {/*<button aria-haspopup="menu" data-testid="more-button" className="Button-sc-1dqy6lx-0 jVIpUU" aria-label="내 플레이리스트 #2에 대한 추가 옵션" data-encore-id="buttonTertiary" aria-expanded="false"><span aria-hidden="true" className="IconWrapper__Wrapper-sc-16usrgb-0 hYdsxw"><svg role="img" height="32" width="32" aria-hidden="true" viewBox="0 0 24 24" data-encore-id="icon" className="Svg-sc-ytk21e-0 haNxPq"><path d="M4.5 13.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm15 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm-7.5 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path></svg></span></button>*/}
                                     {/*{popMenuOpen[index] && (*/}
                                     {/*    <div className="popup-menu">*/}
@@ -436,6 +438,7 @@ function Playlist   () {
                     </ul>
                 </div>
             </div>
+
 
             {/*<button type="button" onClick={() => router.push('/createPlaylist')}>*/}
             {/*    create playlist*/}

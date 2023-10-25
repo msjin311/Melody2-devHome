@@ -88,7 +88,7 @@ function PlaylistDatail( ) {
                     {playlist.songs && playlist.songs.map((song, index) => (
                         <li key={index}>
                             <div>
-                                <span>{song.index}</span>
+                                <span>{index}</span>
                                 <span>{song.title}</span>
                                 <span>{song.artist.groupName}</span>
                                 <span>{song.soloArtist.singerName}</span>
@@ -112,7 +112,6 @@ function PlaylistDatail( ) {
 
                 {/*Usage example*/}
                 {/*<AddSongToPlaylist playlistId={playlistId} songId={songId}></AddSongToPlaylist>*/}
-
             </div>
         </>
         )
