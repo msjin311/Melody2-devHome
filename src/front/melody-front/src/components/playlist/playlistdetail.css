@@ -1,15 +1,31 @@
-.songlist li {
+.songlist li div {
     display: flex;
 }
 
-.songlist li > span {
+.songlist li div > span {
      flex: 1;
  }
-.songlist li > span:last-child {
+
+.songlist li div > span:first-child {
     flex: 0.2;
     /*border: 1px solid black;*/
 }
-.songlist li > span:last-child img {
+
+.songlist li div > span:last-child {
+    flex: 0.2;
+    /*border: 1px solid black;*/
+}
+
+.songlist li div > span:nth-child(5) {
+    flex: 1.5;
+    /*border: 1px solid black;*/
+}
+
+.songlist li div > span:last-child img {
     padding: 10px;
     /*border: 1px solid black;*/
+}
+
+.listIndex{
+    font-weight: bold;
 }

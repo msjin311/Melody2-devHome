@@ -62,12 +62,6 @@ function PlaylistDatail( ) {
 
     return(
         <>
-            <p>Hello Playlist Detail</p>
-            <p>path : { path } </p>
-            <p>params : {params.playlistId }</p>
-            <div>
-                The playlist ID is: {playlistId}
-            </div>
             {/* Header */}
             <header className="bg-white p-4 mb-4 shadow grid grid-cols-2">
                 {/* Header content goes here */}
@@ -81,14 +75,27 @@ function PlaylistDatail( ) {
             <div className="bg-white p-4 mb-4 shadow">
                 <h1>Songs</h1><br/>
                 <ul className="songlist">
+                    <li>
+                        <div className="listIndex">
+                            <span>#</span>
+                            <span>Title</span>
+                            <span>Group</span>
+                            <span>Artist</span>
+                            <span>Song info</span>
+                            <span></span>
+                        </div>
+                    </li>
                     {playlist.songs && playlist.songs.map((song, index) => (
                         <li key={index}>
-                            <span>Title: {song.title}</span>
-                            <span>Group: {song.artist.groupName}</span>
-                            <span>Artist: {song.soloArtist.singerName}</span>
-                            <span>Song Info: {song.songInfo}</span>
-                            {/*<span className="deleteSongButton"><Image src={CloseImg} alt="noimage"></Image></span>*/}
-                            <span className="deleteSongButton"><DeleteSongFromPlaylist playlistId={playlistId} songId={song.songId} onDeleteSuccess={handleDeleteSuccess} ></DeleteSongFromPlaylist></span>
+                            <div>
+                                <span>{song.index}</span>
+                                <span>{song.title}</span>
+                                <span>{song.artist.groupName}</span>
+                                <span>{song.soloArtist.singerName}</span>
+                                <span>{song.songInfo}</span>
+                                {/*<span className="deleteSongButton"><Image src={CloseImg} alt="noimage"></Image></span>*/}
+                                <span className="deleteSongButton"><DeleteSongFromPlaylist playlistId={playlistId} songId={song.songId} onDeleteSuccess={handleDeleteSuccess} ></DeleteSongFromPlaylist></span>
+                            </div>
                         </li>
                     ))}
                 </ul>
