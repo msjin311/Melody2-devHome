@@ -123,7 +123,7 @@ function Playlist   () {
     }, [playlists]);
 
     const getPlaylistsByUserAccountId = (e) =>{
-        axios.get(`/api/playlist/playlist/${userAccountId}`)
+        axios.get(`/api/playlists/playlist/${userAccountId}`)
             .then(response =>{
                 if(response.data){
                     setPlaylists(response.data);
@@ -138,7 +138,7 @@ function Playlist   () {
             });
     }
     const deletePlaylist = (props) => {
-        axios.delete(`/api/playlist/${props}`)
+        axios.delete(`/api/playlists/${props}`)
             .then(response =>{
                 console.log('playlist delete success')
 
@@ -170,7 +170,7 @@ function Playlist   () {
         };
 
         try{
-            axios.put(`/api/playlist`, updatePlaylistRequest)
+            axios.put(`/api/playlists`, updatePlaylistRequest)
                 .then(response =>{
                     console.log('updateplaylistRequest',updatePlaylistRequest)
                     console.log('플레이리스트 업데이트 성공')

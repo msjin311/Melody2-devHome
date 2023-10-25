@@ -59,7 +59,7 @@ function Playlistform(props) {
         };
 
         try{
-            const response = await fetch('/api/playlist',{
+            const response = await fetch('/api/playlists',{
                 method:'POST',
                 headers: {
                     'Content-Type': 'application/json',

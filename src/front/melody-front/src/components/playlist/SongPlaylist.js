@@ -12,7 +12,7 @@ function SongPlaylist({playlistId}) {
 
     const getSongsById = (input) => {
         const playlistId = input
-        axios.get(`/api/playlist/songs/${playlistId}`)
+        axios.get(`/api/playlists/songs/${playlistId}`)
             .then(r =>{
                 console.log(playlistId)
                 if(r.data){
