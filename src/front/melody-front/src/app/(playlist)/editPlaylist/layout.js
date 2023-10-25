@@ -4,9 +4,9 @@
 import React, {useEffect, useRef, useState} from 'react';
 import Link from "next/link";
 import Image from 'next/image';
-import plusImg from '../../img/plus.png';
-import menuImg from '../../img/menu2.png';
-import '../../../css/Menu.css';
+import plusImg from '../../../../public/images/plus.png';
+import menuImg from '../../../../public/images/menu2.png';
+import '../../../components/playlist/Menu.css';
 import registrationForm from "../../../components/user/RegistrationForm";
 
 const EditLayout = ({ children }) => {

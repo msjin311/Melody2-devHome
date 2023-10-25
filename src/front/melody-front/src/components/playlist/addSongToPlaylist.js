@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react';
-import Plus from "../../app/img/plus.png"
+import Plus from "../../../public/images/plus.png"
 import Image from "next/image";
 
 function AddSongToPlaylist({playlistId, songId}) {

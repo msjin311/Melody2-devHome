@@ -5,8 +5,8 @@ import { usePathname, useSearchParams } from "next/navigation"
 import { useParams } from 'next/navigation'
 import Link from "next/link";
 import Image from "next/image";
-import "../../../../../public/css/playlistdetail.css"
-import plusImg from "../../../../app/img/plus.png";
+import "../../../../components/playlist/playlistdetail.css"
+import plusImg from "../../../../../public/images/plus.png";
 import axios from "axios";
 import DeleteSongFromPlaylist from "../../../../components/playlist/DeleteSongFromPlaylist";
 import AddSongToPlaylist from "../../../../components/playlist/addSongToPlaylist";

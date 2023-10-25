@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import ClientComponent from "../components/ClientComponent";
-import {UserAccountContext} from "../components/UserAccountContext";
-import {UserAccountContextProvider} from "../components/UserAccountContext"
+import {UserAccountContext} from "../components/playlist/UserAccountContext";
+import {UserAccountContextProvider} from "../components/playlist/UserAccountContext"
 import {useEffect, useState, useContext} from "react";
 import Login from "./../components/user/Login";
 import Playlist from "./../components/user/Playlist";

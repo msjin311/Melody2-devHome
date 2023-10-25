@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react';
-import CloseImg from "../../app/img/close_111152.png"
+import CloseImg from "../../../public/images/close_111152.png"
 import Image from "next/image";
 
 function DeleteSongFromPlaylist({ playlistId, songId, onDeleteSuccess }) {

@@ -6,11 +6,11 @@ import  { UserContext }  from "../../../contexts/UserContext";
 import { usePathname, useSearchParams } from 'next/navigation'
 import axios from "axios";
 import Image from "next/image";
-import EditModal from "../../../components/EditPlaylistModal";
-import '../../../css/Playlistcss.css'
-import meatballMenu from '../../img/meatballs-menu.svg'
-import plusImg from "../../img/plus.png";
-import CloseImg from "../../img/close_111152.png";
+import EditModal from "../../../components/playlist/EditPlaylistModal";
+import '../../../components/playlist/Playlistcss.css'
+import meatballMenu from '../../../../public/images/meatballs-menu.svg'
+import plusImg from "../../../../public/images/plus.png";
+import CloseImg from "../../../../public/images/close_111152.png";
 
 function Playlist   () {
     // const  userAccount  = useContext(UserAccountContext);

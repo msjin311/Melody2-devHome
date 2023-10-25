@@ -2,12 +2,12 @@
 import React, { useEffect, useState, useContext, useTransition } from 'react';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation'
-import {useUserContext} from "../../../../components/UserAccountContext"
+import {useUserContext} from "../../../../components/playlist/UserAccountContext"
 import axios from "axios";
 import Image from "next/image";
-import meatballMenu from '../../../img/meatballs-menu.svg'
-import plusImg from "../../../img/plus.png";
-import '../../../../css/Playlistcss.css'
+import meatballMenu from '../../../../../public/images/meatballs-menu.svg'
+import plusImg from "../../../../../public/images/plus.png";
+import '../../../../components/playlist/Playlistcss.css'
 
 function EditPlaylist   () {
     const {userAccount,setUserAccount} = useUserContext()

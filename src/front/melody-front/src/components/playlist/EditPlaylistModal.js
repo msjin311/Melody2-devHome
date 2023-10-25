@@ -4,7 +4,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {useUserContext} from "./UserAccountContext";
 import axios from "axios";
 import "./EditPlaylistModal.css"
-import CloseImg from "../../src/app/img/close_111152.png"
+import CloseImg from "../../../public/images/close_111152.png"
 import Image from "next/image";
 
 
