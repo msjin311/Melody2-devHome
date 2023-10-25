@@ -14,7 +14,7 @@ function DeleteSongFromPlaylist({ playlistId, songId, onDeleteSuccess }) {
         };
         console.log(songPlaylist);
         try {
-            const response = await fetch('/api/playlist/deleteSong', {
+            const response = await fetch('/api/playlists/deleteSong', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

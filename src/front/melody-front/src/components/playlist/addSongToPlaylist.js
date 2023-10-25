@@ -18,7 +18,7 @@ function AddSongToPlaylist({playlistId, songId}) {
         };
         console.log(songPlaylist);
         try {
-            const response = await fetch('/api/playlist/addSong', {
+            const response = await fetch('/api/playlists/addSong', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

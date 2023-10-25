@@ -69,7 +69,7 @@ function EditPlaylist   () {
     }, [playlists]);
 
     const getPlaylistsByUserAccountId = (e) =>{
-        axios.get(`/api/playlist/playlist/${userAccountId}`)
+        axios.get(`/api/playlist/playlists/${userAccountId}`)
             .then(response =>{
                 if(response.data){
                     setPlaylists(response.data);
