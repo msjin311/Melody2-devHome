@@ -4,10 +4,12 @@
 
 .songlist li div > span {
      flex: 1;
+    border-bottom: 1px solid #000;
+    padding: 7px;
  }
 
 .songlist li div > span:first-child {
-    flex: 0.2;
+    flex: 0.1;
     /*border: 1px solid black;*/
 }
 

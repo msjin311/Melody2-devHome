@@ -220,13 +220,15 @@ function Playlist   () {
                 <h1>Playlists Page</h1><p/>
                 <div>
                     <ul>
-                        <div className="button-wrapper">
-                            <div>#</div>
-                            <div>Name</div>
-                            <div>Description</div>
-                            <div>Hashtag</div>
-                            <div className="button-meatball"></div>
-                        </div>
+                        <li>
+                            <div className="button-wrapper index">
+                                <div>#</div>
+                                <div>Name</div>
+                                <div>Description</div>
+                                <div>Hashtag</div>
+                                <div className="button-meatball"></div>
+                            </div>
+                        </li>
                         {playlists.map((playlist, index) => (
                             <li key={index} className="">
                                 {/*{playlist.playlistName}*/}
